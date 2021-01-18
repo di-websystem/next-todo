@@ -17,11 +17,11 @@ const Index: NextPage = () => {
   const { addTodoList, inputEl } = useTodoList();
 
   if (error) {
-    return <div>{error}</div>;
+    return <main>error</main>;
   }
 
   if (!data) {
-    return <div>loading...</div>;
+    return <main>loading...</main>;
   }
 
   return (

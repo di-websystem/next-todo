@@ -1,52 +1,41 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+import SQL from 'sql-template-strings';
 import connection from '../../db/connection';
 
-const queryFormat = (query: string) => {
-  return query.replace(/\s+/g, ' ').trim();
-};
-
 const handler = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
-  return new Promise((resolve) => {
-    console.log(req.method);
+  if (req.method === 'GET') {
+    const query = SQL`
+      SELECT
+        *
+      FROM
+        task
+    `;
 
-    if (req.method === 'GET') {
-      const query = queryFormat(`
-        SELECT
-          *
-        FROM
-          task
-      `);
+    const result = await connection(query);
 
-      connection.query(query, (err, rows) => {
-        if (err) {
-          console.log(err);
-          res.status(500).send('error');
-        } else {
-          res.status(200).json(rows);
-        }
-
-        return resolve();
-      });
-    } else if (req.method === 'POST') {
-      const query = queryFormat(`
+    if ('error' in result) {
+      console.log(result);
+      res.status(500).send('error');
+    } else {
+      res.status(200).json(result);
+    }
+  } else if (req.method === 'POST') {
+    const query = SQL`
         INSERT INTO
           task
         SET
-          ?
-      `);
+          item = ${req.body.text}
+      `;
 
-      connection.query(query, { item: req.body.text }, (err) => {
-        if (err) {
-          console.log(err);
-          res.status(500).send('error');
-        } else {
-          res.status(200).send('success');
-        }
+    const result = await connection(query);
 
-        return resolve();
-      });
+    if ('error' in result) {
+      console.log(result);
+      res.status(500).send('error');
+    } else {
+      res.status(200).json('success');
     }
-  });
+  }
 };
 
 export default handler;

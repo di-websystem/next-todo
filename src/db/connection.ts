@@ -1,4 +1,5 @@
-import mysql from 'mysql2';
+import mysql from 'serverless-mysql';
+import type { SQLStatement } from 'sql-template-strings';
 
 type TDBconfig = {
   host: string;
@@ -16,4 +17,18 @@ const dbconfig: TDBconfig = {
   port: (process?.env?.DB_PORT && parseInt(process.env.DB_PORT, 10)) || 3306,
 };
 
-export default mysql.createConnection(dbconfig);
+const db = mysql({
+  config: dbconfig,
+});
+
+export default async (query: SQLStatement): Promise<any> => {
+  try {
+    const results = await db.query(query);
+    await db.end();
+    return results;
+  } catch (error) {
+    return { error };
+  }
+};
+
+// export default mysql.createConnection(dbconfig);
