@@ -27,6 +27,7 @@ http://localhost:3000/
 - github
 - vercel
 - heroku
+- anyanv, nodenv
 - vscode, vim
 
 #### 使用したライブラリ、フレームワーク、モジュールなど
