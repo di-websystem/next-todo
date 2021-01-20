@@ -18,7 +18,7 @@ http://localhost:3000/
 
 ## Development environment
 
-### 開発環境など
+#### 開発環境など
 
 - windows10 wsl2 ubuntu
 - windows terminal
@@ -29,7 +29,7 @@ http://localhost:3000/
 - heroku
 - vscode, vim
 
-### 使用したライブラリ、フレームワーク、モジュールなど
+#### 使用したライブラリ、フレームワーク、モジュールなど
 
 - node.js, next.js, typescript, prettier, eslint, jest, enzyme (基盤として利用)
 - next-pwa (pwa に利用)
