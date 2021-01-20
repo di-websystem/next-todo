@@ -1,4 +1,5 @@
 import { NextPage } from 'next';
+import { signIn, signOut, useSession } from 'next-auth/client';
 import React from 'react';
 import { Transition } from 'react-transition-group';
 import useSWR from 'swr';
@@ -10,6 +11,7 @@ import useAnimation from '../hooks/animation';
 import useTodoList from '../hooks/todo';
 
 const Index: NextPage = () => {
+  const [session, loading] = useSession();
   const { data, error } = useSWR('/api/todo', fetcher, fetcherOption);
 
   const { animate } = useAnimation();
@@ -20,13 +22,27 @@ const Index: NextPage = () => {
     return <main>error</main>;
   }
 
-  if (!data) {
+  if (loading || !data) {
     return <main>loading...</main>;
   }
 
   return (
     <main>
       <Title>TODO</Title>
+
+      <div>
+        {session ? (
+          <>
+            Signed in as {session.user.name} <br />
+            <button onClick={() => signOut()}>Sign out</button>
+          </>
+        ) : (
+          <>
+            Not signed in <br />
+            <button onClick={() => signIn()}>Sign in</button>
+          </>
+        )}
+      </div>
 
       <section>
         <input ref={inputEl} type="text" />
