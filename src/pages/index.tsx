@@ -30,7 +30,7 @@ const Index: NextPage = () => {
     <main>
       <Title>TODO</Title>
 
-      <div>
+      <section>
         {session ? (
           <>
             Signed in as {session.user.name} <br />
@@ -42,7 +42,7 @@ const Index: NextPage = () => {
             <button onClick={() => signIn()}>Sign in</button>
           </>
         )}
-      </div>
+      </section>
 
       <section>
         <input ref={inputEl} type="text" />
