@@ -1,3 +1,4 @@
+import { Provider } from 'next-auth/client';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 
@@ -16,7 +17,9 @@ const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => (
       <link rel="icon" type="image/png" href="/android-chrome-256x256.png" />
     </Head>
 
-    <Component {...pageProps} />
+    <Provider session={pageProps.session}>
+      <Component {...pageProps} />
+    </Provider>
   </>
 );
 
