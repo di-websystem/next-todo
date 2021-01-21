@@ -40,3 +40,4 @@ http://localhost:3000/
 - swr (データ取得、キャッシュの補助で利用)
 - serverless-mysql (データベースとの繋ぎに利用)
 - sql-template-strings (クエリの整形に利用)
+- storybook (コンポーネントカタログに利用)
