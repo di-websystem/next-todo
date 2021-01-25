@@ -27,7 +27,7 @@ const Index: NextPage = () => {
   }
 
   return (
-    <main>
+    <>
       <Title>TODO</Title>
 
       <section>
@@ -60,7 +60,7 @@ const Index: NextPage = () => {
       <Transition in={animate} timeout={500}>
         {(state) => <Toast state={state}>add success</Toast>}
       </Transition>
-    </main>
+    </>
   );
 };
 

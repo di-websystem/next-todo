@@ -1,6 +1,8 @@
 import { Provider } from 'next-auth/client';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
+import Main from '../components/atoms/Main';
+import Background from '../components/atoms/background/Background';
 
 const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => (
   <>
@@ -18,7 +20,10 @@ const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => (
     </Head>
 
     <Provider session={pageProps.session}>
-      <Component {...pageProps} />
+      <Background />
+      <Main>
+        <Component {...pageProps} />
+      </Main>
     </Provider>
   </>
 );
